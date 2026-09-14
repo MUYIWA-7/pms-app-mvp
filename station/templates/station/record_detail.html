@@ -1,0 +1,232 @@
+{% extends "station/base.html" %}
+{% load static %}
+
+{% block title %}
+    Daily Report | PMS Station Manager
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'station/css/record_detail.css' %}">
+
+<div class="page-header">
+    <h1>Daily Report</h1>
+    <p>
+        {{ record.date|date:"F d, Y" }}
+    </p>
+</div>
+
+
+<!-- REPORT -->
+
+<div class="report-card">
+
+    <div class="report-header">
+        <div>
+            <h2>PMS Daily Report</h2>
+            <p>{{ record.date|date:"F d, Y" }}</p>
+        </div>
+
+        <button
+            type="button"
+            class="print-btn"
+            onclick="window.print()"
+        >
+            Print Report
+        </button>
+    </div>
+
+
+    <!-- METER READINGS -->
+
+    <div class="report-section">
+
+        <h3>Meter Readings</h3>
+
+        <div class="report-grid">
+
+            <div class="report-item">
+                <span>Nozzle A Opening</span>
+                <strong>{{ record.nozzle_a_opening|floatformat:2 }}</strong>
+            </div>
+
+            <div class="report-item">
+                <span>Nozzle A Closing</span>
+                <strong>{{ record.nozzle_a_closing|floatformat:2 }}</strong>
+            </div>
+
+            <div class="report-item">
+                <span>Nozzle A Litres</span>
+                <strong>{{ record.nozzle_a_litres|floatformat:2 }} L</strong>
+            </div>
+
+            <div class="report-item">
+                <span>Nozzle B Opening</span>
+                <strong>{{ record.nozzle_b_opening|floatformat:2 }}</strong>
+            </div>
+
+            <div class="report-item">
+                <span>Nozzle B Closing</span>
+                <strong>{{ record.nozzle_b_closing|floatformat:2 }}</strong>
+            </div>
+
+            <div class="report-item">
+                <span>Nozzle B Litres</span>
+                <strong>{{ record.nozzle_b_litres|floatformat:2 }} L</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SALES -->
+
+    <div class="report-section">
+
+        <h3>Sales Summary</h3>
+
+        <div class="report-grid">
+
+            <div class="report-item">
+                <span>PMS Price Per Litre</span>
+                <strong>
+                    ₦{{ record.price_per_litre|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div class="report-item">
+                <span>Total Litres Sold</span>
+                <strong>
+                    {{ record.total_litres|floatformat:2 }} L
+                </strong>
+            </div>
+
+            <div class="report-item highlight">
+                <span>Total PMS Sales</span>
+                <strong>
+                    ₦{{ record.total_sales|floatformat:2 }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EXPENSES -->
+
+    <div class="report-section">
+
+        <h3>Expenses</h3>
+
+        {% for expense in record.expenses.all %}
+
+            <div class="expense-row">
+
+                <div>
+                    <strong>{{ expense.category }}</strong>
+
+                    {% if expense.description %}
+                        <p>{{ expense.description }}</p>
+                    {% endif %}
+                </div>
+
+                <strong>
+                    ₦{{ expense.amount|floatformat:2 }}
+                </strong>
+
+            </div>
+
+        {% empty %}
+
+            <p class="empty">
+                No expenses were recorded for this day.
+            </p>
+
+        {% endfor %}
+
+        <div class="total-row">
+            <span>Total Expenses</span>
+            <strong>
+                ₦{{ record.total_expenses|floatformat:2 }}
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="report-section">
+
+        <h3>Cash Reconciliation</h3>
+
+        <div class="report-grid">
+ 
+            <div class="report-item">
+                <span>Expected Balance</span>
+                <strong>
+                    ₦{{ record.amount_remaining|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div class="report-item">
+                <span>Cash Collected</span>
+                <strong>
+                    ₦{{ record.cash_collected|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div class="report-item">
+                <span>Transfers Received</span>
+                <strong>
+                    ₦{{ record.transfers_received|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div class="report-item">
+                <span>Actual Received</span>
+                <strong>
+                    ₦{{ record.actual_received|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div class="report-item highlight">
+                <span>Reconciliation Status</span>
+                <strong>
+                    {{ record.reconciliation_status }}
+                </strong>
+            </div>
+
+            <div class="report-item">
+                <span>Difference</span>
+                <strong>
+                    ₦{{ record.reconciliation_difference|floatformat:2 }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINAL BALANCE -->
+
+    <div class="balance-section">
+
+        <span>Amount Remaining</span>
+
+        <strong>
+            ₦{{ record.amount_remaining|floatformat:2 }}
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div class="back-link">
+    <a href="{% url 'records' %}">
+        ← Back to Previous Records
+    </a>
+</div>
+
+{% endblock %}

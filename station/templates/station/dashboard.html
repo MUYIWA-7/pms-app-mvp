@@ -1,0 +1,464 @@
+{% extends "station/base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Dashboard | PMS Station Manager
+{% endblock %}
+
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'station/css/dashboard.css' %}">
+
+
+<!-- =========================
+     PAGE HEADER
+========================= -->
+
+<div class="page-header">
+
+    <h1>
+        Dashboard
+    </h1>
+
+    <p>
+        PMS station overview
+    </p>
+
+</div>
+
+
+<!-- =========================
+     TODAY'S STATUS
+========================= -->
+
+<div class="status-card">
+
+    <div>
+
+        <span class="status-label">
+            Today's Record
+        </span>
+
+        <h2>
+            {{ today_status }}
+        </h2>
+
+    </div>
+
+
+    {% if today_status == "Not Started" %}
+
+        <p>
+            No opening reading has been recorded for today.
+        </p>
+
+    {% elif today_status == "In Progress" %}
+
+        <p>
+            Opening readings have been saved. Closing readings are still pending.
+        </p>
+
+    {% else %}
+
+        <p>
+            Today's PMS record has been completed.
+        </p>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =========================
+     LATEST COMPLETED DAY
+========================= -->
+
+<div class="section-heading">
+
+    <h2>
+        Latest Completed Day
+    </h2>
+
+    {% if latest_record %}
+
+        <p>
+            {{ latest_record.date|date:"F d, Y" }}
+        </p>
+
+    {% else %}
+
+        <p>
+            No completed daily record yet.
+        </p>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =========================
+     SUMMARY CARDS
+========================= -->
+
+<div class="cards">
+
+    <!-- Total Litres -->
+
+    <div class="card">
+
+        <div class="card-label">
+            Total Litres Sold
+        </div>
+
+        <div class="card-value">
+            {% if latest_record %}
+                {{ total_litres|floatformat:2 }} L
+            {% else %}
+                —
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <!-- PMS Sales -->
+
+    <div class="card">
+
+        <div class="card-label">
+            PMS Sales
+        </div>
+
+        <div class="card-value">
+            {% if latest_record %}
+                ₦{{ total_sales|floatformat:2 }}
+            {% else %}
+                —
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <!-- Expenses -->
+
+    <div class="card">
+
+        <div class="card-label">
+            Total Expenses
+        </div>
+
+        <div class="card-value">
+            {% if latest_record %}
+                ₦{{ total_expenses|floatformat:2 }}
+            {% else %}
+                —
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <!-- Amount Remaining -->
+
+    <div class="card">
+
+        <div class="card-label">
+            Amount Remaining
+        </div>
+
+        <div class="card-value">
+            {% if latest_record %}
+                ₦{{ amount_remaining|floatformat:2 }}
+            {% else %}
+                —
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="card-label">Cash Reconciliation</div>
+
+        {% if latest_record %}
+            <div class="card-value status-{{ latest_record.reconciliation_status|lower }}">
+                {{ latest_record.reconciliation_status }}
+            </div>
+
+            <div class="card-subtext">
+                Difference:
+                ₦{{ latest_record.reconciliation_difference|floatformat:2 }}
+            </div>
+        {% else %}
+            <div class="card-value">—</div>
+        {% endif %}
+    </div>
+
+</div>
+
+
+<!-- =========================
+     7-DAY PERFORMANCE
+========================= -->
+
+<div class="performance-section">
+
+    <div class="section-heading">
+
+        <h2>
+            7-Day Performance
+        </h2>
+
+        <p>
+            Performance based on completed daily records.
+        </p>
+
+    </div>
+
+
+    <div class="performance-grid">
+
+        <div class="performance-card">
+
+            <span>
+                Total Sales
+            </span>
+
+            <strong>
+                ₦{{ period_sales|floatformat:2 }}
+            </strong>
+
+        </div>
+
+
+        <div class="performance-card">
+
+            <span>
+                Total Litres
+            </span>
+
+            <strong>
+                {{ period_litres|floatformat:2 }} L
+            </strong>
+
+        </div>
+
+
+        <div class="performance-card">
+
+            <span>
+                Total Expenses
+            </span>
+
+            <strong>
+                ₦{{ period_expenses|floatformat:2 }}
+            </strong>
+
+        </div>
+
+
+        <div class="performance-card">
+
+            <span>
+                Average Daily Sales
+            </span>
+
+            <strong>
+                ₦{{ average_daily_sales|floatformat:2 }}
+            </strong>
+
+        </div>
+
+
+        <div class="performance-card best-day">
+
+            <span>
+                Best Sales Day
+            </span>
+
+            {% if best_sales_record %}
+
+                <strong>
+                    ₦{{ best_sales_record.total_sales|floatformat:2 }}
+                </strong>
+
+                <small>
+                    {{ best_sales_record.date|date:"d M Y" }}
+                </small>
+
+            {% else %}
+
+                <strong>—</strong>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SALES OVERVIEW
+========================= -->
+
+<div class="chart-card">
+
+    <div class="section-heading">
+
+        <h2>
+            Sales Overview
+        </h2>
+
+        <p>
+            PMS sales for the last 7 completed days.
+        </p>
+
+    </div>
+
+
+    {% if chart_dates %}
+
+        <div class="chart-container">
+
+            <canvas id="salesChart"></canvas>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-chart">
+
+            <p>
+                Complete some daily records to see your sales trend.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =========================
+     DAILY ENTRY BUTTON
+========================= -->
+
+<div class="dashboard-action">
+
+    <a href="{% url 'daily' %}" class="btn">
+
+        {% if today_status == "Not Started" %}
+
+            Record Today's Opening
+
+        {% elif today_status == "In Progress" %}
+
+            Complete Today's Record
+
+        {% else %}
+
+            View Today's Record
+
+        {% endif %}
+
+    </a>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const chartDates = {{ chart_dates|safe }};
+    const chartSales = {{ chart_sales|safe }};
+    const chartExpenses = {{ chart_expenses|safe }};
+
+    const salesChart = document.getElementById("salesChart");
+
+    if (salesChart) {
+
+        new Chart(salesChart, {
+
+            type: "line",
+
+            data: {
+
+                labels: chartDates,
+
+                datasets: [
+
+                    {
+                        label: "PMS Sales",
+
+                        data: chartSales,
+
+                        borderWidth: 2,
+
+                        tension: 0.3,
+
+                        fill: false
+                    },
+
+                    {
+                        label: "Expenses",
+
+                        data: chartExpenses,
+
+                        borderWidth: 2,
+
+                        tension: 0.3,
+
+                        fill: false
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: true
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            callback: function(value) {
+                                return "₦" + value.toLocaleString();
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+</script>
+
+
+{% endblock %}

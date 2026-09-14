@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | PMS Station Manager</title>
+
+    <style>
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f5f6f8;
+
+            font-family: Arial, sans-serif;
+            color: #222;
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .logo {
+            text-align: center;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #6b7280;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+
+            border-color: #111827;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error {
+            color: #c0392b;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .login-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #111827;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            opacity: 0.9;
+        }
+
+
+        /* =========================
+           SIGNUP LINK
+        ========================= */
+
+        .signup-link {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #6b7280;
+        }
+
+        .signup-link a {
+            color: #111827;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         LOGIN CONTAINER
+    ========================= -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <!-- Logo / Title -->
+
+            <div class="logo">
+                PMS Station Manager
+            </div>
+
+            <p class="subtitle">
+                Login to your station management account
+            </p>
+
+
+            <!-- Login Error -->
+
+            {% if error %}
+
+                <div class="error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- Login Form -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- Signup Link -->
+
+            <p class="signup-link">
+
+                Don't have an account?
+
+                <a href="{% url 'signup' %}">
+                    Create an account
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+{% extends "station/base.html" %}
+{% load static %}
+
+{% block title %}
+    Stock & Deliveries | PMS Station Manager
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'station/css/stock.css' %}">
+
+<div class="page-header">
+    <h1>Stock & Deliveries</h1>
+    <p>Manage fuel deliveries and monitor estimated underground stock.</p>
+</div>
+
+<!-- Add Delivery -->
+<div class="section-card">
+
+    <div class="section-heading">
+        <h2>Add Fuel Delivery</h2>
+        <p>Record a new fuel delivery and the physical tank reading.</p>
+    </div>
+
+    <form method="POST" class="delivery-form">
+
+        {% csrf_token %}
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="{{ delivery_form.product.id_for_label }}">
+                    Product
+                </label>
+
+                {{ delivery_form.product }}
+
+                {% if delivery_form.product.errors %}
+                    <div class="form-error">
+                        {{ delivery_form.product.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ delivery_form.quantity_received.id_for_label }}">
+                    Quantity Received
+                </label>
+
+                {{ delivery_form.quantity_received }}
+
+                {% if delivery_form.quantity_received.errors %}
+                    <div class="form-error">
+                        {{ delivery_form.quantity_received.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ delivery_form.delivery_date.id_for_label }}">
+                    Delivery Date
+                </label>
+
+                {{ delivery_form.delivery_date }}
+
+                {% if delivery_form.delivery_date.errors %}
+                    <div class="form-error">
+                        {{ delivery_form.delivery_date.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ delivery_form.cost_per_unit.id_for_label }}">
+                    Cost / Price per Litre
+                </label>
+
+                {{ delivery_form.cost_per_unit }}
+
+                {% if delivery_form.cost_per_unit.errors %}
+                    <div class="form-error">
+                        {{ delivery_form.cost_per_unit.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ delivery_form.supplier.id_for_label }}">
+                    Supplier
+                </label>
+
+                {{ delivery_form.supplier }}
+
+                {% if delivery_form.supplier.errors %}
+                    <div class="form-error">
+                        {{ delivery_form.supplier.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ delivery_form.physical_tank_reading.id_for_label }}">
+                    Physical Tank Reading
+                </label>
+
+                {{ delivery_form.physical_tank_reading }}
+
+                {% if delivery_form.physical_tank_reading.errors %}
+                    <div class="form-error">
+                        {{ delivery_form.physical_tank_reading.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+        <div class="form-group full-width">
+
+            <label for="{{ delivery_form.reference.id_for_label }}">
+                Reference / Notes
+            </label>
+
+            {{ delivery_form.reference }}
+
+            {% if delivery_form.reference.errors %}
+                <div class="form-error">
+                    {{ delivery_form.reference.errors }}
+                </div>
+            {% endif %}
+
+        </div>
+
+        <button type="submit" class="btn">
+            Save Delivery
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- Current Stock -->
+<div class="section-card">
+
+    <div class="section-heading">
+        <h2>Current Stock</h2>
+        <p>Estimated fuel remaining underground.</p>
+    </div>
+
+    <div class="stock-grid">
+
+        <div class="stock-card">
+            <span>Product</span>
+            <strong>PMS</strong>
+
+            {% if latest_delivery %}
+                <div class="stock-details">
+
+                    <p>
+                        Last Physical Reading:
+                        <strong class="stock-number">
+                            {{ latest_delivery.physical_tank_reading|floatformat:2 }} L
+                        </strong>
+                    </p>
+
+                    <p>
+                        Estimated Sold: 
+                        <strong class="stock-number">
+                            {{ estimated_sold|floatformat:2 }} L
+                        </strong>
+                    </p>
+
+                <p>
+                    Estimated Remaining: 
+                    <strong class="stock-number remaining">
+                        {{ estimated_remaining|floatformat:2 }} L
+                    </strong>
+                </p>
+
+                <p>
+                    Last Delivery:
+                    {{ latest_delivery.delivery_date|date:"d M Y" }}
+                </p>
+
+            {% else %}
+
+                <div class="stock-details">
+                    <p>No PMS delivery recorded yet.</p>
+                </div>
+
+            {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Delivery History -->
+<div class="section-card">
+
+    <div class="section-heading">
+        <h2>Delivery History</h2>
+        <p>Previous fuel deliveries recorded by the station.</p>
+    </div>
+
+    {% if deliveries %}
+
+        <div class="table-wrapper">
+
+            <table class="delivery-table">
+
+                <thead>
+                    <tr>
+                        <th>Delivery Date</th>
+                        <th>Product</th>
+                        <th>Quantity Delivered</th>
+                        <th>Supplier</th>
+                        <th>Cost / Price</th>
+                        <th>Tank Reading</th>
+                        <th>Reference / Notes</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for delivery in deliveries %}
+
+                        <tr>
+
+                            <td>
+                                {{ delivery.delivery_date|date:"d M Y" }}
+                            </td>
+
+                            <td>
+                                {{ delivery.product.name }}
+                            </td>
+
+                            <td>
+                                {{ delivery.quantity_received|floatformat:2 }}
+                                {{ delivery.product.unit }}
+                            </td>
+
+                            <td>
+                                {{ delivery.supplier }}
+                            </td>
+
+                            <td>
+                                ₦{{ delivery.cost_per_unit|floatformat:2 }}
+                            </td>
+
+                            <td>
+                                {{ delivery.physical_tank_reading|floatformat:2 }}
+                                {{ delivery.product.unit }}
+                            </td>
+
+                            <td>
+                                {% if delivery.reference %}
+                                    {{ delivery.reference }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+            <p>No fuel deliveries recorded yet.</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

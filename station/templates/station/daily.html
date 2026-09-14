@@ -1,0 +1,484 @@
+{% extends "station/base.html" %}
+{% load static %}
+
+{% block title %}
+    Daily Reading
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'station/css/daily.css' %}">
+
+<div class="page-container">
+
+    <!-- =========================
+         DAILY READING
+    ========================== -->
+
+    <div class="section-card">
+
+        <div class="section-heading">
+            <h2>Daily Reading</h2>
+            <p>Enter the PMS meter readings for the day.</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- DATE & PMS PRICE -->
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="{{ daily_form.date.id_for_label }}">
+                        Date
+                    </label>
+
+                    {{ daily_form.date }}
+
+                    {% if daily_form.date.errors %}
+                        <div class="form-error">
+                            {{ daily_form.date.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ daily_form.price_per_litre.id_for_label }}">
+                        PMS Price per Litre
+                    </label>
+
+                    {{ daily_form.price_per_litre }}
+
+                    {% if daily_form.price_per_litre.errors %}
+                        <div class="form-error">
+                            {{ daily_form.price_per_litre.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 NOZZLE A
+            ========================== -->
+
+            <div class="nozzle-box">
+
+                <h3>Nozzle A</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="{{ daily_form.nozzle_a_opening.id_for_label }}">
+                            Opening Reading
+                        </label>
+
+                        {{ daily_form.nozzle_a_opening }}
+
+                        {% if daily_form.nozzle_a_opening.errors %}
+                            <div class="form-error">
+                                {{ daily_form.nozzle_a_opening.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="{{ daily_form.nozzle_a_closing.id_for_label }}">
+                            Closing Reading
+                        </label>
+
+                        {{ daily_form.nozzle_a_closing }}
+
+                        {% if daily_form.nozzle_a_closing.errors %}
+                            <div class="form-error">
+                                {{ daily_form.nozzle_a_closing.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 NOZZLE B
+            ========================== -->
+
+            <div class="nozzle-box">
+
+                <h3>Nozzle B</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="{{ daily_form.nozzle_b_opening.id_for_label }}">
+                            Opening Reading
+                        </label>
+
+                        {{ daily_form.nozzle_b_opening }}
+
+                        {% if daily_form.nozzle_b_opening.errors %}
+                            <div class="form-error">
+                                {{ daily_form.nozzle_b_opening.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="{{ daily_form.nozzle_b_closing.id_for_label }}">
+                            Closing Reading
+                        </label>
+
+                        {{ daily_form.nozzle_b_closing }}
+
+                        {% if daily_form.nozzle_b_closing.errors %}
+                            <div class="form-error">
+                                {{ daily_form.nozzle_b_closing.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 READING BUTTONS
+            ========================== -->
+
+            <div class="reading-buttons">
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="save_opening"
+                    class="btn"
+                    {% if record %}disabled{% endif %}
+                >
+                    {% if record %}
+                        Opening Reading Saved
+                    {% else %}
+                        Save Opening Reading
+                    {% endif %}
+                </button>
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="save_closing"
+                    class="btn"
+                    {% if not record %}disabled{% endif %}
+                >
+                    Save Closing Reading
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+<!-- =========================
+     DAILY EXPENSES
+========================== -->
+
+<div class="section-card">
+
+    <div class="section-heading">
+        <h2>Daily Expenses</h2>
+        <p>Record expenses for this day.</p>
+    </div>
+
+    {% if record %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="action" value="add_expense">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="{{ expense_form.category.id_for_label }}">
+                        Category
+                    </label>
+
+                    {{ expense_form.category }}
+
+                    {% if expense_form.category.errors %}
+                        <div class="form-error">
+                            {{ expense_form.category.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ expense_form.description.id_for_label }}">
+                        Description
+                    </label>
+
+                    {{ expense_form.description }}
+
+                    {% if expense_form.description.errors %}
+                        <div class="form-error">
+                            {{ expense_form.description.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ expense_form.amount.id_for_label }}">
+                        Amount
+                    </label>
+
+                    {{ expense_form.amount }}
+
+                    {% if expense_form.amount.errors %}
+                        <div class="form-error">
+                            {{ expense_form.amount.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn">
+                Add Expense
+            </button>
+
+        </form>
+
+
+        <!-- EXPENSE LIST -->
+
+        {% if expenses %}
+
+            <div class="expense-list">
+
+                {% for expense in expenses %}
+
+                    <div class="expense-item">
+
+                        <div>
+                            <strong>{{ expense.category }}</strong>
+
+                            {% if expense.description %}
+                                <p>{{ expense.description }}</p>
+                            {% endif %}
+                        </div>
+
+                        <span>
+                            ₦{{ expense.amount|floatformat:2 }}
+                        </span>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+                No expenses recorded for this day.
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        <div class="empty-state">
+            Save the opening reading first before adding expenses.
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =========================
+     CASH RECONCILIATION
+========================== -->
+
+{% if record %}
+
+<div class="section-card">
+
+    <div class="section-heading">
+        <h2>Cash Reconciliation</h2>
+        <p>Enter the actual money received for the day.</p>
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="action" value="save_cash">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="{{ daily_form.cash_collected.id_for_label }}">
+                    Cash Collected
+                </label>
+
+                {{ daily_form.cash_collected }}
+
+                {% if daily_form.cash_collected.errors %}
+                    <div class="form-error">
+                        {{ daily_form.cash_collected.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ daily_form.transfers_received.id_for_label }}">
+                    Transfers Received
+                </label>
+
+                {{ daily_form.transfers_received }}
+
+                {% if daily_form.transfers_received.errors %}
+                    <div class="form-error">
+                        {{ daily_form.transfers_received.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- SAVE CASH RECONCILIATION -->
+
+        <div class="reading-buttons">
+
+            <button type="submit" class="btn">
+                Save Cash Reconciliation
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <!-- RECONCILIATION RESULT -->
+
+    {% if record.nozzle_a_closing is not None and record.nozzle_b_closing is not None %}
+
+        <div class="reconciliation-result">
+
+            <div>
+                <span>Expected Balance</span>
+                <strong>
+                    ₦{{ record.amount_remaining|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div>
+                <span>Actual Received</span>
+                <strong>
+                    ₦{{ record.actual_received|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div>
+                <span>Difference</span>
+                <strong>
+                    ₦{{ record.reconciliation_difference|floatformat:2 }}
+                </strong>
+            </div>
+
+            <div>
+                <span>Status</span>
+                <strong class="status-{{ record.reconciliation_status|lower }}">
+                    {{ record.reconciliation_status }}
+                </strong>
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+
+<!-- =========================
+     DAILY SUMMARY
+     THIS IS THE LAST SECTION
+========================== -->
+
+{% if record %}
+
+<div class="section-card">
+
+    <div class="section-heading">
+        <h2>Daily Summary</h2>
+        <p>Summary of the day's PMS activity.</p>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-item">
+            <span>Nozzle A Litres</span>
+            <strong>
+                {{ record.nozzle_a_litres|floatformat:2 }}
+            </strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Nozzle B Litres</span>
+            <strong>
+                {{ record.nozzle_b_litres|floatformat:2 }}
+            </strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Total Litres Sold</span>
+            <strong>
+                {{ record.total_litres|floatformat:2 }}
+            </strong>
+        </div>
+
+        <div class="summary-item">
+            <span>PMS Sales</span>
+            <strong>
+                ₦{{ record.total_sales|floatformat:2 }}
+            </strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Total Expenses</span>
+            <strong>
+                ₦{{ record.total_expenses|floatformat:2 }}
+            </strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Amount Remaining</span>
+            <strong>
+                ₦{{ record.amount_remaining|floatformat:2 }}
+            </strong>
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

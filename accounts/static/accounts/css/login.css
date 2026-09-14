@@ -1,0 +1,246 @@
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.login-page {
+    min-height: calc(100vh - 82px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f2ec 0%,
+            #eee9df 100%
+        );
+}
+
+
+/* =========================
+   LOGIN CARD
+========================= */
+
+.login-card {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 45px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd8cf;
+
+    box-shadow:
+        15px 20px 50px rgba(25, 39, 47, 0.12);
+
+    position: relative;
+}
+
+
+/* Terracotta accent */
+
+.login-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #c66f48;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.login-header {
+    margin-bottom: 35px;
+}
+
+.login-label {
+    color: #c66f48;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 12px;
+}
+
+.login-header h1 {
+    color: #182d38;
+
+    font-size: 38px;
+    line-height: 1.1;
+
+    margin-bottom: 10px;
+}
+
+.login-header p:last-child {
+    color: #647077;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group label {
+    color: #263741;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d9d4ca;
+
+    background: #f5f2ec;
+
+    color: #18252f;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+.form-group input:focus {
+    background: #ffffff;
+
+    border-color: #c66f48;
+
+    box-shadow:
+        0 0 0 3px rgba(198, 111, 72, 0.12);
+}
+
+.form-group input::placeholder {
+    color: #8a9498;
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.form-submit {
+    margin-top: 5px;
+}
+
+.login-btn {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border: 1px solid #c66f48;
+
+    background: #c66f48;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #a95735;
+
+    border-color: #a95735;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   SIGNUP LINK
+========================= */
+
+.signup-link {
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #ddd8cf;
+
+    text-align: center;
+}
+
+.signup-link p {
+    display: inline;
+
+    color: #707b80;
+
+    font-size: 13px;
+}
+
+.signup-link a {
+    margin-left: 5px;
+
+    color: #c66f48;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #a95735;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .login-page {
+        padding: 40px 18px;
+    }
+
+    .login-card {
+        padding: 35px 25px;
+    }
+
+    .login-header h1 {
+        font-size: 32px;
+    }
+
+}

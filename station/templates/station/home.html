@@ -1,0 +1,898 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StationX | Smarter Station Management</title>
+
+    <link rel="stylesheet" href="{% static 'station/css/home.css' %}">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="{% url 'home' %}" class="brand">
+                Station<span>X</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+                <a href="#pricing">Pricing</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="{% url 'login' %}" class="login-link">
+                    Login
+                </a>
+
+                <a href="{% url 'signup' %}" class="nav-button">
+                    Get Started
+                    <span>→</span>
+                </a>
+            </div>
+
+            <button class="menu-button" type="button">
+                ☰
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        Fuel Station Management Software
+                    </div>
+
+                    <h1>
+                        Smarter Station
+                        <span>Management.</span>
+                    </h1>
+
+                    <p>
+                        StationX gives you one powerful platform to manage
+                        fuel sales, inventory, expenses, purchases,
+                        reconciliation and your entire station operation.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="{% url 'signup' %}" class="primary-button">
+                            Get Started
+                            <span>→</span>
+                        </a>
+
+                        <a href="#features" class="secondary-button">
+                            Explore Features
+                        </a>
+
+                    </div>
+
+                    <div class="hero-highlights">
+
+                        <div class="hero-highlight">
+                            <div class="highlight-icon">✓</div>
+                            <div>
+                                <strong>Secure & Reliable</strong>
+                                <span>Your data stays protected</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-highlight">
+                            <div class="highlight-icon">⚡</div>
+                            <div>
+                                <strong>Easy to Use</strong>
+                                <span>Simple, intuitive management</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-highlight">
+                            <div class="highlight-icon">↗</div>
+                            <div>
+                                <strong>Built for Growth</strong>
+                                <span>From one station to many</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO IMAGE -->
+
+                <div class="hero-visual">
+
+                    <div class="station-image">
+                        <img
+                            src="{% static 'station/images/station-hero.jpg' %}"
+                            alt="Modern fuel station"
+                        >
+                    </div>
+
+                    <div class="dashboard-preview">
+
+                        <div class="dashboard-window">
+
+                            <div class="dashboard-top">
+                                <strong>StationX</strong>
+
+                                <div class="dashboard-user">
+                                    <span></span>
+                                    Admin
+                                </div>
+                            </div>
+
+                            <div class="dashboard-body">
+
+                                <aside class="dashboard-sidebar">
+
+                                    <div class="sidebar-item active">
+                                        Dashboard
+                                    </div>
+
+                                    <div class="sidebar-item">
+                                        Sales
+                                    </div>
+
+                                    <div class="sidebar-item">
+                                        Inventory
+                                    </div>
+
+                                    <div class="sidebar-item">
+                                        Purchases
+                                    </div>
+
+                                    <div class="sidebar-item">
+                                        Customers
+                                    </div>
+
+                                    <div class="sidebar-item">
+                                        Reports
+                                    </div>
+
+                                </aside>
+
+                                <div class="dashboard-main">
+
+                                    <h3>Dashboard</h3>
+
+                                    <div class="dashboard-cards">
+
+                                        <div class="mini-card">
+                                            <span>Total Sales</span>
+                                            <strong>₦2,458,750</strong>
+                                            <small>+12%</small>
+                                        </div>
+
+                                        <div class="mini-card">
+                                            <span>Fuel Sold</span>
+                                            <strong>12,450 L</strong>
+                                            <small>+8%</small>
+                                        </div>
+
+                                        <div class="mini-card">
+                                            <span>Cash Received</span>
+                                            <strong>₦2,412,000</strong>
+                                            <small>+10%</small>
+                                        </div>
+
+                                        <div class="mini-card">
+                                            <span>Expenses</span>
+                                            <strong>₦368,500</strong>
+                                            <small>-3%</small>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="dashboard-lower">
+
+                                        <div class="chart-preview">
+                                            <span>Sales Overview</span>
+
+                                            <div class="fake-chart">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="stock-preview">
+
+                                            <span>Fuel Stock</span>
+
+                                            <p>
+                                                <i></i>
+                                                PMS
+                                                <strong>8,420 L</strong>
+                                            </p>
+
+                                            <p>
+                                                <i></i>
+                                                AGO
+                                                <strong>5,210 L</strong>
+                                            </p>
+
+                                            <p>
+                                                <i></i>
+                                                Gas
+                                                <strong>3,180 kg</strong>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FEATURES
+        ========================== -->
+
+        <section class="features-section" id="features">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <span>EVERYTHING YOUR STATION NEEDS</span>
+
+                    <h2>
+                        Powerful Features for
+                        <strong>Complete Control</strong>
+                    </h2>
+
+                    <p>
+                        Everything you need to run your station efficiently,
+                        reduce costs and make better decisions — all in one place.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <!-- FEATURE 1 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ⛽
+                        </div>
+
+                        <div>
+                            <h3>Fuel Management</h3>
+
+                            <p>
+                                Manage PMS, AGO and Gas with accurate
+                                tracking and monitoring.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 2 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ↗
+                        </div>
+
+                        <div>
+                            <h3>Sales & Meter Tracking</h3>
+
+                            <p>
+                                Monitor sales, meter readings and
+                                fuel dispensed across your station.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 3 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ◈
+                        </div>
+
+                        <div>
+                            <h3>Inventory & Stock</h3>
+
+                            <p>
+                                Track fuel stock levels, deliveries
+                                and inventory movement.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 4 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🚚
+                        </div>
+
+                        <div>
+                            <h3>Purchases & Suppliers</h3>
+
+                            <p>
+                                Record fuel purchases and keep
+                                supplier information organized.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 5 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ₦
+                        </div>
+
+                        <div>
+                            <h3>Cash & Reconciliation</h3>
+
+                            <p>
+                                Compare expected and actual money
+                                received every day.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 6 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ▣
+                        </div>
+
+                        <div>
+                            <h3>Expense Management</h3>
+
+                            <p>
+                                Track and manage your station's
+                                operating expenses.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 7 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ♙
+                        </div>
+
+                        <div>
+                            <h3>Customer Management</h3>
+
+                            <p>
+                                Manage customers, transactions and
+                                important customer information.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 8 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ▤
+                        </div>
+
+                        <div>
+                            <h3>Multi-Station Management</h3>
+
+                            <p>
+                                Control multiple stations from
+                                one account.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 9 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ♙
+                        </div>
+
+                        <div>
+                            <h3>Staff & Roles</h3>
+
+                            <p>
+                                Assign roles and control what each
+                                staff member can access.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 10 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ▥
+                        </div>
+
+                        <div>
+                            <h3>Reports & Analytics</h3>
+
+                            <p>
+                                Get detailed insights into station
+                                performance and operations.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 11 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ♢
+                        </div>
+
+                        <div>
+                            <h3>Alerts & Notifications</h3>
+
+                            <p>
+                                Stay informed about important
+                                updates and station activity.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 12 -->
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <div>
+                            <h3>Secure Accounts</h3>
+
+                            <p>
+                                Keep your business information
+                                protected with secure access.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             HOW IT WORKS
+        ========================== -->
+
+        <section class="how-section" id="how-it-works">
+
+            <div class="section-container">
+
+                <div class="how-content">
+
+                    <div class="how-image">
+
+                        <img
+                            src="{% static 'station/images/station-operation.jpg' %}"
+                            alt="Fuel station staff managing operations"
+                        >
+
+                    </div>
+
+
+                    <div class="how-text">
+
+                        <span class="section-label">
+                            HOW IT WORKS
+                        </span>
+
+                        <h2>
+                            Simple Steps to
+                            <strong>Smarter Operations</strong>
+                        </h2>
+
+                        <p>
+                            Get started in minutes and take control
+                            of your station with a simple,
+                            straightforward system.
+                        </p>
+
+
+                        <div class="steps">
+
+                            <div class="step">
+
+                                <div class="step-number">
+                                    1
+                                </div>
+
+                                <div>
+                                    <h3>Record</h3>
+
+                                    <p>
+                                        Enter daily sales, readings
+                                        and transactions.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="step">
+
+                                <div class="step-number">
+                                    2
+                                </div>
+
+                                <div>
+                                    <h3>Monitor</h3>
+
+                                    <p>
+                                        Track inventory, cash and
+                                        station performance.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="step">
+
+                                <div class="step-number">
+                                    3
+                                </div>
+
+                                <div>
+                                    <h3>Analyze</h3>
+
+                                    <p>
+                                        View reports and discover
+                                        valuable insights.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="step">
+
+                                <div class="step-number">
+                                    4
+                                </div>
+
+                                <div>
+                                    <h3>Improve</h3>
+
+                                    <p>
+                                        Make better decisions and
+                                        grow your station.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MULTI-STATION
+        ========================== -->
+
+        <section class="growth-section" id="about">
+
+            <div class="section-container">
+
+                <div class="growth-content">
+
+                    <div class="growth-text">
+
+                        <span class="section-label">
+                            BUILT FOR GROWTH
+                        </span>
+
+                        <h2>
+                            Designed for Today.
+                            <strong>Built for Tomorrow.</strong>
+                        </h2>
+
+                        <p>
+                            StationX brings all your station operations
+                            together in one powerful platform. Whether
+                            you run one station or a growing network,
+                            StationX helps you work smarter and move faster.
+                        </p>
+
+
+                        <ul class="growth-list">
+
+                            <li>
+                                <span>✓</span>
+                                One Station or Many
+                            </li>
+
+                            <li>
+                                <span>✓</span>
+                                Flexible & Scalable
+                            </li>
+
+                            <li>
+                                <span>✓</span>
+                                Modern & Reliable
+                            </li>
+
+                            <li>
+                                <span>✓</span>
+                                Always Improving
+                            </li>
+
+                        </ul>
+
+
+                        <a href="{% url 'signup' %}" class="primary-button">
+                            Learn More
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+
+                    <div class="growth-image">
+
+                        <img
+                            src="{% static 'station/images/multiple-stations.jpg' %}"
+                            alt="Multiple fuel stations"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRICING PLACEHOLDER
+        ========================== -->
+
+        <section class="pricing-section" id="pricing">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <span>PRICING</span>
+
+                    <h2>
+                        Simple and
+                        <strong>Accessible</strong>
+                    </h2>
+
+                    <p>
+                        StationX is being built to make professional
+                        station management accessible to businesses of every size.
+                    </p>
+
+                </div>
+
+                <div class="pricing-message">
+
+                    <h3>
+                        Flexible plans are coming soon.
+                    </h3>
+
+                    <p>
+                        Start exploring StationX and discover a
+                        smarter way to manage your station.
+                    </p>
+
+                    <a href="{% url 'signup' %}" class="primary-button">
+                        Get Started
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FINAL CTA
+        ========================== -->
+
+        <section class="cta-section">
+
+            <div class="cta-container">
+
+                <div class="cta-background"></div>
+
+                <div class="cta-content">
+
+                    <span class="section-label">
+                        THE COMPLETE SOLUTION
+                    </span>
+
+                    <h2>
+                        Manage More.
+                        <strong>Worry Less.</strong>
+                    </h2>
+
+                    <p>
+                        StationX brings your station operations
+                        together so you can spend less time
+                        calculating and more time growing.
+                    </p>
+
+                    <a href="{% url 'signup' %}" class="primary-button">
+                        Get Started Today
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <a href="{% url 'home' %}" class="brand">
+                    Station<span>X</span>
+                </a>
+
+                <p>
+                    Smarter Station Management.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+                <a href="#pricing">Pricing</a>
+
+            </div>
+
+
+            <div class="footer-copy">
+
+                <span>
+                    © 2026 StationX. All rights reserved.
+                </span>
+
+                <span>
+                    A product of Global Royal.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         MOBILE MENU
+    ========================== -->
+
+    <script>
+
+        const menuButton = document.querySelector(".menu-button");
+        const navLinks = document.querySelector(".nav-links");
+        const navActions = document.querySelector(".nav-actions");
+
+        menuButton.addEventListener("click", function () {
+
+            navLinks.classList.toggle("mobile-open");
+            navActions.classList.toggle("mobile-open");
+
+        });
+
+    </script>
+
+</body>
+</html>
