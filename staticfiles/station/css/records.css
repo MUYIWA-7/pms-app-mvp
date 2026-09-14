@@ -1,0 +1,192 @@
+/* =========================
+   TABLE CARD
+========================= */
+
+.table-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================
+   TABLE WRAPPER
+========================= */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+
+th {
+    text-align: left;
+    padding: 15px;
+
+    background: #f9fafb;
+
+    color: #374151;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+td {
+    padding: 16px 15px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 14px;
+}
+
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+
+/* =========================
+   BALANCE
+========================= */
+
+.balance {
+    font-weight: bold;
+}
+
+
+/* =========================
+   VIEW REPORT BUTTON
+========================= */
+
+.view-btn {
+    display: inline-block;
+
+    background: #111827;
+    color: white;
+
+    padding: 8px 13px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.view-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+
+.empty-state h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+
+.empty-state p {
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   RECORD STATUS
+========================= */
+
+.in-progress {
+    color: #6b7280;
+    font-style: italic;
+}
+
+
+/* =========================
+   CONTINUE BUTTON
+========================= */
+
+.continue-btn {
+    display: inline-block;
+
+    background: white;
+    color: #111827;
+
+    padding: 8px 13px;
+
+    border: 1px solid #111827;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.continue-btn:hover {
+    background: #111827;
+    color: white;
+}
+
+.reconciliation-status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-balanced {
+    color: #166534;
+    background: #f0fdf4;
+}
+
+.status-short {
+    color: #b91c1c;
+    background: #fef2f2;
+}
+
+.status-over {
+    color: #92400e;
+    background: #fffbeb;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .table-card {
+        padding: 15px;
+    }
+
+}

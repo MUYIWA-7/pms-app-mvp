@@ -1,0 +1,159 @@
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    background: #f5f6f8;
+
+    font-family: Arial, sans-serif;
+
+    color: #222;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+    background: #111827;
+
+    padding: 18px 5%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.logo {
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #d1d5db;
+
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+.messages {
+    margin-bottom: 20px;
+}
+
+.message {
+    background: white;
+
+    padding: 14px 18px;
+
+    margin-bottom: 10px;
+
+    border-radius: 6px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.06);
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+    display: inline-block;
+
+    background: #111827;
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 15px;
+    }
+
+    .container {
+        width: 94%;
+
+        margin: 25px auto;
+    }
+
+}
